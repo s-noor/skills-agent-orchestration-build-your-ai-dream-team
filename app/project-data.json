@@ -1,0 +1,44 @@
+{
+  "projects": [
+    {
+      "name": "Community Resource Hub",
+      "owner": "Maya Chen",
+      "status": "Active",
+      "recentActivity": "The resource directory received its first round of community feedback.",
+      "priority": "High",
+      "summary": "Build an easy-to-navigate directory so neighbors can find local support and services."
+    },
+    {
+      "name": "Open Data Toolkit",
+      "owner": "Jordan Rivera",
+      "status": "At risk",
+      "recentActivity": "A review of the import workflow surfaced a few data-format edge cases.",
+      "priority": "Medium",
+      "summary": "Help contributors publish trustworthy datasets with clear documentation and reusable tools."
+    },
+    {
+      "name": "Accessibility Refresh",
+      "owner": "Sam Okafor",
+      "status": "Active",
+      "recentActivity": "Keyboard navigation improvements are ready for a second review.",
+      "priority": "High",
+      "summary": "Make core team workflows more accessible through practical, tested interface improvements."
+    },
+    {
+      "name": "Volunteer Onboarding",
+      "owner": "Avery Brooks",
+      "status": "Planned",
+      "recentActivity": "The team gathered onboarding questions to shape the first guide outline.",
+      "priority": "Low",
+      "summary": "Create a welcoming first contribution path with clear setup steps and friendly project context."
+    },
+    {
+      "name": "Field Notes Mobile",
+      "owner": "Taylor Morgan",
+      "status": "Blocked",
+      "recentActivity": "A device testing dependency is still pending before the next field trial.",
+      "priority": "High",
+      "summary": "Let field teams capture and share useful observations when they are away from a desk."
+    }
+  ]
+}

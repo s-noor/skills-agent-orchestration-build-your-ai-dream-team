@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f6f8">
+    <title>Project Pulse</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <p class="eyebrow">TEAM WORKSPACE</p>
+        <h1>Project Pulse</h1>
+        <p class="page-subtitle">A clear view of what’s moving, who’s leading, and where a helping hand can make a difference.</p>
+      </header>
+
+      <section class="dashboard-section" aria-labelledby="projects-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE WORK IN PROGRESS</p>
+            <h2 id="projects-heading">Projects</h2>
+          </div>
+          <p class="section-note">Current status and latest updates from the team</p>
+        </div>
+        <div class="dashboard" id="project-list" aria-live="polite">
+          <p class="loading-message">Loading projects…</p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const projectList = document.querySelector("#project-list");
+
+      function createTextElement(tagName, className, text) {
+        const element = document.createElement(tagName);
+        if (className) element.className = className;
+        element.textContent = text;
+        return element;
+      }
+
+      function renderProjects(projects) {
+        projectList.replaceChildren();
+
+        projects.forEach((project) => {
+          const card = document.createElement("article");
+          card.className = "project-card";
+
+          const cardHeader = document.createElement("div");
+          cardHeader.className = "card-header";
+          const title = createTextElement("h3", "project-name", project.name);
+          const status = createTextElement("span", "status-badge", project.status);
+          status.dataset.status = project.status.toLowerCase().replace(/[^a-z]+/g, "-");
+          cardHeader.append(title, status);
+
+          const owner = document.createElement("p");
+          owner.className = "project-owner";
+          owner.append(createTextElement("span", "field-label", "Owner"), document.createTextNode(project.owner));
+
+          const summary = createTextElement("p", "project-summary", project.summary);
+
+          const activity = document.createElement("div");
+          activity.className = "project-activity";
+          activity.append(
+            createTextElement("span", "field-label", "Recent activity"),
+            createTextElement("p", "activity-text", project.recentActivity)
+          );
+
+          const footer = document.createElement("div");
+          footer.className = "card-footer";
+          footer.append(
+            createTextElement("span", "priority-label", "Priority"),
+            createTextElement("span", "priority-value", project.priority)
+          );
+
+          card.append(cardHeader, owner, summary, activity, footer);
+          projectList.append(card);
+        });
+      }
+
+      fetch("project-data.json")
+        .then((response) => {
+          if (!response.ok) throw new Error("Project data could not be loaded.");
+          return response.json();
+        })
+        .then((data) => {
+          if (!Array.isArray(data.projects)) throw new Error("Project data is missing its projects list.");
+          renderProjects(data.projects);
+        })
+        .catch(() => {
+          projectList.replaceChildren(
+            createTextElement("p", "loading-message", "Project updates are unavailable right now. Please try refreshing.")
+          );
+        });
+    </script>
+  </body>
+</html>
